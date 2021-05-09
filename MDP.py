@@ -1,4 +1,3 @@
-
 import pprint
 #5 rows 17 columns
 
@@ -12,16 +11,7 @@ for i in range(6, 11):
 for i in range(10, 15):
     grid[i][0] = 1000
 
-
-
 deltas = [(1,0), (-1, 0), (0, 1), (0, -1)]
-
-
-# def prop_neighbors(grid, state):
-#     deltas = [(1,0), (-1, 0), (0, 1), (0, -1)]
-#     neighbors = list((state[0] + d[0], state[1] + d[1]) for d in deltas)
-#     properNeighbors = list(filter(lambda x: (0<=x[0]< 5 and 0<=x[1]<17), neighbors))
-#     return properNeighbors
 
 def prop_actions(grid, state):
     deltas = [(1,0), (-1, 0), (0, 1), (0, -1)]
@@ -99,13 +89,6 @@ def valueiteration(grid):
         if max(abs(min_cost[state] - new_min_cost[state]) for state in min_cost) < 1e-10:
             converge = True
         min_cost = new_min_cost
-    pi = {}
-    for state in min_cost:
-        if state == goalState:
-            pi[state] = 'none'
-        elif grid[state[0]][state[1]] == 1000:
-            pi[state] = 'none'
-        else:
-            pi[state] = min(exp_update(state, action) for action in prop_actions(grid, state))
     return min_cost
+
 pprint.pprint(valueiteration(grid))
